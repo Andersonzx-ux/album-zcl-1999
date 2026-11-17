@@ -6,6 +6,29 @@ window.album = {
     genre: "Sertanejo",
     labels: ["Columbia, Sony Music"],
     cover: "assets/cover.jpg",
+    // Duas capas = dois temas. Dia: capa p&b (assets/cover.jpg). Noite: foto colorida (assets/foto.jpg).
+    coverNight: "assets/foto.jpg",
+    // Cores medidas nas capas (medianas de regiões e faixas de luminância/matiz; ver tools/medir_paletas.py)
+    palette: {
+        dia: {
+            white: "#FFFFFF",   // fundo branco da capa
+            mist: "#F1F7F4",    // realces da pele (cinza-esverdeado muito claro)
+            silver: "#95A29A",  // tom médio (mediana da luminância)
+            slate: "#56665C",   // camisa listrada
+            deep: "#0F1B18",    // sombras da camisa e dos cabelos
+            ink: "#000201"      // preto da blusa
+        },
+        noite: {
+            black: "#030609",   // blusa preta
+            hair: "#231F1B",    // cabelo
+            maroon: "#471F1B",  // vinho escuro das sombras da camisa
+            wine: "#572A26",    // camisa vinho
+            stripe: "#90443E",  // risco avermelhado da camisa
+            skin: "#DE9D7B",    // pele
+            shadow: "#744E35",  // pele em sombra
+            snow: "#FAFBFB"     // fundo branco da foto
+        }
+    },
     description: "",
     totalDuration: "56:53",
     awards: [

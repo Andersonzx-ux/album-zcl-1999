@@ -1,77 +1,22 @@
-# Álbum Player Interativo - Zezé Di Camargo & Luciano 2003
+# Zezé Di Camargo & Luciano — 1999 (player)
 
-Este projeto é um player/encarte digital premium, desenvolvido com foco na experiência mobile (Safari/iOS) e na reprodução de áudio estática (GitHub Pages).
+Player estático (HTML/CSS/JS, sem build) para GitHub Pages. Dados em `data/album.js`.
 
-## Estrutura do Projeto
+## Dia e Noite = duas capas
+- **Dia** usa a capa branca do álbum (`assets/cover.jpg`, p&b): papel branco, preto da blusa e cinzas da camisa.
+- **Noite** usa a foto colorida (`assets/foto.jpg`): preto da blusa, camisa vinho listrada e pele como destaque.
+O botão Dia/Noite troca a capa (com transição), o fundo desfocado e toda a paleta. A escolha fica salva.
 
-```
-album-player/
-│
-├── index.html       # Estrutura principal da página
-│
-├── css/
-│   └── style.css    # Estilos (mobile-first, variáveis CSS, estética premium)
-│
-├── js/
-│   ├── app.js       # Ponto de entrada e inicialização
-│   ├── player.js    # Lógica de controle de áudio (HTML5 Audio API)
-│   └── ui.js        # Lógica de interface (DOM, modais, renderização)
-│
-├── data/
-│   └── album.js     # ARQUIVO PRINCIPAL DE DADOS (todas as informações ficam aqui)
-│
-├── assets/
-│   └── cover.jpg    # Capa do álbum (imagem principal e ambiental)
-│
-├── audio/
-│   └── (seus arquivos .mp3 aqui)
-│
-└── README.md
-```
+## Paletas (medidas nos pixels)
+Dia: white `#FFFFFF`, mist `#F1F7F4`, silver `#95A29A`, slate `#56665C`, deep `#0F1B18`, ink `#000201`.
+Noite: black `#030609`, hair `#231F1B`, maroon `#471F1B`, wine `#572A26`, stripe `#90443E`, skin `#DE9D7B`, shadow `#744E35`, snow `#FAFBFB`.
 
-## Como Editar os Dados
+## Identidade
+- **Progresso = o logo da capa**: por onde a faixa já passou, as letras prateadas "ZEZE DI CAMARGO & LUCIANO" se preenchem (preto no Dia, vermelho-vinho da camisa na Noite), com máscara real das letras de cada imagem. Clique/arraste no logo para buscar na faixa.
+- A divisória são as listras reais da camisa (cinza no Dia, vinho na Noite).
+- Fontes: Marcellus (títulos) e Jost (texto), ambas OFL em `assets/fonts/`.
+- Central de mídia (Media Session) com capa, anterior/próxima e seek.
 
-A aplicação é **totalmente orientada a dados**. Nunca edite o arquivo HTML para adicionar músicas, letras ou premiações.
-Tudo deve ser alterado no arquivo `data/album.js`.
-
-### 1. Capa do Álbum
-Substitua o arquivo `assets/cover.jpg` pela capa oficial em alta resolução. O sistema automaticamente criará o fundo ambiental embaçado usando essa mesma imagem.
-
-### 2. Informações Gerais
-Abra `data/album.js` e edite os campos do objeto principal (`title`, `releaseDate`, `description`, etc).
-
-### 3. Ficha Técnica e Premiações
-- A ficha técnica está na propriedade `technicalCredits`.
-- As premiações ficam no array `awards`. Deixe o array vazio `[]` se não houver dados, o sistema tratará a interface automaticamente.
-
-### 4. Músicas (18 faixas)
-Dentro de `data/album.js`, existe o array `tracks` com 18 objetos.
-Para adicionar uma música:
-```javascript
-{
-    number: 1,
-    title: "Nome da Música",
-    duration: "03:45",
-    composers: ["Compositor 1", "Compositor 2"],
-    audio: "audio/01-faixa.mp3",
-    lyrics: "Letra da música aqui..."
-}
-```
-
-**ARQUIVOS DE ÁUDIO:** 
-Coloque os arquivos `.flac` dentro da pasta `audio/` na raiz do projeto e referencie o caminho relativo no campo `audio` de cada faixa (ex: `audio/01.flac`). Recomenda-se nomear os arquivos com o número da faixa para manter a organização (01-, 02-, etc). Como o GitHub Pages tem limite de tamanho por repositório (recomendado até ~1GB), fique atento ao tamanho total dos MP3s se o álbum for grande.
-
-### 5. Letras Sincronizadas (formato LRC)
-O campo `lyrics` aceita dois formatos:
-
-- **Texto simples**, exibido estático (comportamento original).
-- **Formato LRC**, com tags de tempo `[mm:ss.xx]` no início de cada linha. Quando o sistema detecta esse padrão, a letra é exibida linha por linha e a linha atual é destacada automaticamente conforme a música toca (efeito karaokê), com rolagem automática.
-
-Exemplo de `lyrics` no formato LRC:
-```javascript
-lyrics: `[00:12.00]Primeira linha da música
-[00:16.50]Segunda linha da música
-[00:21.30]Terceira linha da música`
-```
-
-Você pode conseguir arquivos `.lrc` prontos em sites de letras sincronizadas, ou criar/editar manualmente. Basta colar o conteúdo do `.lrc` (mantendo as tags de tempo) direto no campo `lyrics` como uma string. Não é necessário fazer upload do arquivo `.lrc` em si — o conteúdo dele vira texto dentro do `album.js`.
+## Arquivos
+`index.html`, `css/style.css`, `js/{app,player,ui}.js`, `data/album.js` (ganhou `coverNight` e o bloco `palette`), `assets/{cover.jpg, foto.jpg, cover-256.jpg, cover-512.jpg, foto-256.jpg, logo-dia.webp, logo-noite.webp, listras.jpg, fonts/}`, `tools/`.
+`assets/zcl.png` e `assets/zclogo.png` não são mais usados.
