@@ -9,8 +9,8 @@ const ICONS = {
     repeatOne: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1l-2 1v1h1.5v4H13z"/></svg>'
 };
 
-// Cada tema tem a sua paleta (album.palette.dia / .noite); as variáveis são --d-* (Dia) e --n-* (Noite)
-const PALETTE_PREFIX = { dia: '--d-', noite: '--n-' };
+// Paleta medida na capa (album.palette) → variáveis --d-*; o tema Noite usa os pretos e cinzas da mesma capa
+const PALETTE_PREFIX = '--d-';
 
 class UI {
     constructor(player, albumData) {
@@ -96,9 +96,7 @@ class UI {
         const p = this.albumData.palette;
         if (!p) return;
         const root = document.documentElement;
-        Object.keys(PALETTE_PREFIX).forEach((w) => {
-            Object.entries(p[w] || {}).forEach(([key, val]) => root.style.setProperty(PALETTE_PREFIX[w] + key, val));
-        });
+        Object.entries(p).forEach(([key, val]) => root.style.setProperty(PALETTE_PREFIX + key, val));
     }
 
     applyWorld(world) {
@@ -106,7 +104,7 @@ class UI {
         const w = world === 'noite' ? 'noite' : 'dia';
         root.dataset.world = w;
         const p = this.albumData.palette || {};
-        this.elements.metaTheme.setAttribute('content', w === 'noite' ? ((p.noite || {}).black || '#030609') : ((p.dia || {}).white || '#FFFFFF'));
+        this.elements.metaTheme.setAttribute('content', w === 'noite' ? (p.deep || '#0F1B18') : (p.white || '#FFFFFF'));
         const label = document.getElementById('world-label');
         if (label) label.textContent = w === 'noite' ? 'Noite' : 'Dia';
         return w;
